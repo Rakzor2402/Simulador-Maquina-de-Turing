@@ -1,0 +1,146 @@
+{
+  "description": "Máquina de Turing que acepta cadenas con igual número de 0s y 1s",
+  "states": [
+    "q0",
+    "q1",
+    "q2",
+    "q4",
+    "q_accept",
+    "q_reject"
+  ],
+  "input_alphabet": ["0", "1"],
+  "tape_alphabet": ["0", "1", "X", "Y", "_"],
+  "initial_state": "q0",
+  "blank_symbol": "_",
+  "accept_states": ["q_accept"],
+  "transitions": [
+    {
+      "current_state": "q0",
+      "read_symbol": "0",
+      "next_state": "q1",
+      "write_symbol": "X",
+      "direction": "R",
+      "comment": "Marca un 0 con X y busca un 1"
+    },
+    {
+      "current_state": "q0",
+      "read_symbol": "Y",
+      "next_state": "q0",
+      "write_symbol": "Y",
+      "direction": "R",
+      "comment": "Salta los 1s ya marcados"
+    },
+    {
+      "current_state": "q0",
+      "read_symbol": "_",
+      "next_state": "q4",
+      "write_symbol": "_",
+      "direction": "L",
+      "comment": "Llegó al final, verifica"
+    },
+    {
+      "current_state": "q1",
+      "read_symbol": "0",
+      "next_state": "q1",
+      "write_symbol": "0",
+      "direction": "R",
+      "comment": "Busca un 1 para emparejar"
+    },
+    {
+      "current_state": "q1",
+      "read_symbol": "1",
+      "next_state": "q2",
+      "write_symbol": "Y",
+      "direction": "L",
+      "comment": "Marca el 1 con Y"
+    },
+    {
+      "current_state": "q1",
+      "read_symbol": "Y",
+      "next_state": "q1",
+      "write_symbol": "Y",
+      "direction": "R",
+      "comment": "Salta los Y ya marcados"
+    },
+    {
+      "current_state": "q1",
+      "read_symbol": "_",
+      "next_state": "q_reject",
+      "write_symbol": "_",
+      "direction": "R",
+      "comment": "No hay más 1s, rechaza"
+    },
+    {
+      "current_state": "q2",
+      "read_symbol": "0",
+      "next_state": "q2",
+      "write_symbol": "0",
+      "direction": "L",
+      "comment": "Regresa al inicio"
+    },
+    {
+      "current_state": "q2",
+      "read_symbol": "Y",
+      "next_state": "q2",
+      "write_symbol": "Y",
+      "direction": "L",
+      "comment": "Regresa al inicio"
+    },
+    {
+      "current_state": "q2",
+      "read_symbol": "X",
+      "next_state": "q2",
+      "write_symbol": "X",
+      "direction": "L",
+      "comment": "Regresa al inicio"
+    },
+    {
+      "current_state": "q2",
+      "read_symbol": "_",
+      "next_state": "q0",
+      "write_symbol": "_",
+      "direction": "R",
+      "comment": "Llegó al inicio, continúa"
+    },
+    {
+      "current_state": "q4",
+      "read_symbol": "X",
+      "next_state": "q4",
+      "write_symbol": "X",
+      "direction": "L",
+      "comment": "Verifica que todo esté marcado"
+    },
+    {
+      "current_state": "q4",
+      "read_symbol": "Y",
+      "next_state": "q4",
+      "write_symbol": "Y",
+      "direction": "L",
+      "comment": "Verifica que todo esté marcado"
+    },
+    {
+      "current_state": "q4",
+      "read_symbol": "_",
+      "next_state": "q_accept",
+      "write_symbol": "_",
+      "direction": "R",
+      "comment": "Todo correcto, acepta"
+    },
+    {
+      "current_state": "q4",
+      "read_symbol": "0",
+      "next_state": "q_reject",
+      "write_symbol": "0",
+      "direction": "R",
+      "comment": "Sobran 0s, rechaza"
+    },
+    {
+      "current_state": "q4",
+      "read_symbol": "1",
+      "next_state": "q_reject",
+      "write_symbol": "1",
+      "direction": "R",
+      "comment": "Sobran 1s, rechaza"
+    }
+  ]
+}
